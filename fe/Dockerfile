@@ -3,6 +3,7 @@ FROM node:14-alpine as base
 WORKDIR /opt/dnm
 COPY *.json ./
 COPY yarn.lock ./
+COPY .env* ./
 RUN yarn
 EXPOSE 3000
 
@@ -18,4 +19,5 @@ COPY public public
 RUN yarn build
 
 FROM nginx:latest as production
+EXPOSE 80
 COPY --from=build-prod /opt/dnm/build /usr/share/nginx/html/

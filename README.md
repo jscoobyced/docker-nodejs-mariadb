@@ -2,11 +2,14 @@
 
 This is all you need to build a full website using ReactJS and NodeJS.
 
+[![codecov](https://codecov.io/gh/jscoobyced/docker-nodejs-mariadb/branch/main/graph/badge.svg)](https://codecov.io/gh/jscoobyced/docker-nodejs-mariadb)
+
+
 ## Quick Start
 
 ### Development mode
 
-You can simply run `docker-compse up -d` on the root folder and it will start a hot-reload verison of both Front-End and Back-End. This means if you change anything on either side, it will immediately be reflected.
+You can simply run `docker-compose up -d` on the root folder and it will start a hot-reload version of both Front-End and Back-End. This means if you change anything on either side, it will immediately be reflected. Depending on what you change you might still have to refresh the browser page though.
 
 You can then open the application at http://localhost:3000.
 
@@ -49,3 +52,7 @@ You must update the `YOUR_DOMAIN.TLD`, `YOUR_DOMAIN` and `8000` to reflect the a
 The Back-End runs on ExpressJS and exposes port 3001. In the same way, you can run a reverse-proxy or a load-balancer in front of it to expose it to the Internet.
 
 You can refer to the [README](./be/README.md) for more details.
+
+## Documentation
+
+You can find full documentations in the [doc](doc/README.md) folder.

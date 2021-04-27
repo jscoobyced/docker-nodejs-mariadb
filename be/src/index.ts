@@ -1,16 +1,40 @@
 import express from 'express';
-import { routes } from './routes';
+import { routes } from './routes/routes';
+import cors from 'cors';
+import { allowedOrigins } from './utils/cors';
+import * as dotenv from 'dotenv';
+import { startMySQL, stopMySQL } from './repos';
+import { logger } from './utils/logger';
+
+dotenv.config();
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.BACK_END_API_PORT || 3001;
 
-app.use(express.urlencoded({extended: false}));
+const corsOptions = {
+  origin: allowedOrigins(),
+  optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT'],
+};
+
+app.use(cors(corsOptions));
+const extended = process.env.NODE_ENV === 'test';
+app.use(express.json());
+app.use(express.urlencoded({ extended }));
 
 routes.forEach((route) => {
-  const { method, path, middleware, handler } = route;
-  app[method](path, ...middleware, handler);
+  const { version, method, path, middleware, handler } = route;
+  app[method](`${version}${path}`, ...middleware, handler);
 });
 
-app.listen(PORT, () => {
-  console.log(`Express with Typescript! http://localhost:${PORT}`);
-});
+if (process.env.NODE_ENV !== 'test') {
+  app.listen(PORT, () => {
+    logger.info(`Started Express at http://localhost:${PORT}`);
+    startMySQL();
+  });
+  process.on('exit', () => {
+    stopMySQL();
+  });
+}
+
+export default app;
