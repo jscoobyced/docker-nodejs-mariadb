@@ -1,0 +1,52 @@
+version: "3.7"
+
+services:
+
+  fe:
+    build:
+      context: fe/
+      target: development
+    volumes:
+      - type: bind
+        source: ./fe/src
+        target: /opt/dnm/src
+      - type: bind
+        source: ./fe/public
+        target: /opt/dnm/public
+    ports:
+      - "3000:3000"
+
+  be:
+    build:
+      context: be/
+      target: development
+    volumes:
+      - type: bind
+        source: ./be/src
+        target: /opt/dnm/src
+    ports:
+      - "3001:3001"
+    environment:
+      NODE_ENV: development
+      DB_HOST: db
+      DB_USER: app_user
+      DB_PASSWORD: oas87nyfrc8odvs7
+      DB_NAME: my_app
+
+#  db:
+#    image: mariadb:latest
+#    restart: unless-stopped
+#    environment:
+#      MYSQL_DATABASE: my_app
+#      MYSQL_USER: app_user
+#      MYSQL_PASSWORD: oas87nyfrc8odvs7
+#      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+#    volumes:
+#      - type: bind
+#        source: ./db
+#        target: "/var/lib/mysql"
+
+volumes:
+  be:
+  fe:
+#  db:
