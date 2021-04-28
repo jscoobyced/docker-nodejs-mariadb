@@ -4,7 +4,7 @@ import { routes } from './routes';
 const app = express();
 const PORT = 3001;
 
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 
 routes.forEach((route) => {
   const { method, path, middleware, handler } = route;
