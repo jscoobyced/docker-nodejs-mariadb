@@ -28,6 +28,11 @@
       "react-app/jest"
     ]
   },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/index.tsx"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",
