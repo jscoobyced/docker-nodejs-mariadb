@@ -2,9 +2,7 @@ import { getAllUsers, addNewUser, userByUsername } from '../services/UserService
 import { Handler } from '../models/types';
 
 export const getUsers: Handler = (req, res) => {
-  const users = getAllUsers();
-  const response = users.map((user) => `User ${user.username}`).join('<br />');
-  res.send(response);
+  res.send(getAllUsers());
 };
 
 export const getUserByUsername: Handler = (req, res) => {
@@ -16,10 +14,10 @@ export const getUserByUsername: Handler = (req, res) => {
 };
 
 export const addUser: Handler = (req, res) => {
-  const { username, password } = req.body;
-  if (!username?.trim() || !password?.trim()) {
-    return res.status(400).send('Bad username or password');
+  const { username, firstname, lastname } = req.body;
+  if (!username?.trim() || !firstname?.trim() || !lastname?.trim()) {
+    return res.status(400).send('Bad user information');
   }
-  addNewUser({ username, password });
+  addNewUser({ username, firstname, lastname });
   res.status(201).send('User created');
 };

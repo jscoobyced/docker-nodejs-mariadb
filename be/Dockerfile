@@ -9,6 +9,7 @@ EXPOSE 3001
 
 FROM base as development
 ENV NODE_ENV=development
+COPY .env ./
 VOLUME ["/opt/dnm/src"]
 CMD ["yarn", "start"]
 

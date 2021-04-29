@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import { App } from './pages/Home';
 import { ServiceContext } from './services/context';
-import { UserService } from './services/User';
+import { MockUserService } from './services/User/mock';
 
-const userService = UserService();
+const userService = MockUserService();
 
 ReactDOM.render(
   <React.StrictMode>
