@@ -11,7 +11,7 @@ export const MockUserService = (): IUserService => {
           { username: 'Jane', firstname: 'Jane', lastname: 'Doe' },
           { username: 'Kevin', firstname: 'Kevin', lastname: 'Smith' },
         ]);
-      }, 2000)
+      }, 500)
     });
   }
 

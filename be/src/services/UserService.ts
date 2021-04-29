@@ -5,7 +5,7 @@ export const getAllUsers = (): User[] => {
   return getUsers();
 };
 
-export const addNewUser = (user: User) => {
+export const addNewUser = (user: User): void => {
   addUser(user);
 };
 

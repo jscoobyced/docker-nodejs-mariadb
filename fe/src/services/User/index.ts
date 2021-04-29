@@ -1,4 +1,5 @@
 import { User } from "..";
+import { BACK_END_SERVICES_ENDPOINTS, BACK_END_URL } from "../../config/constants";
 
 export interface IUserService {
   getUsers: () => Promise<User[]>
@@ -6,16 +7,8 @@ export interface IUserService {
 
 export const UserService = (): IUserService => {
   const getUsers = async (): Promise<User[]> => {
-    return new Promise((resolve, reject) => {
-      let wait = setTimeout(() => {
-        clearTimeout(wait);
-        resolve([
-          { username: 'Johnny', firstname: 'Johnny', lastname: 'Smith' },
-          { username: 'Janet', firstname: 'Janet', lastname: 'Doe' },
-          { username: 'Kelvin', firstname: 'Kelvin', lastname: 'Smith' },
-        ]);
-      }, 2000)
-    });
+    const response = await fetch(`${BACK_END_URL}${BACK_END_SERVICES_ENDPOINTS.getUsers}`);
+    return response.json();
   }
 
   return {

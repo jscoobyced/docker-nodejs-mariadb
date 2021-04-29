@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './index.css';
 import { AUTHOR, COPYRIGHT, RELEASE_YEAR, TITLE } from '../../config/constants';
 import { User } from '../../services';
@@ -6,18 +6,19 @@ import { ServiceContext } from '../../services/context';
 
 export const App = () => {
 
-  const [users, setUsers] = React.useState([] as User[]);
-  const { userService } = React.useContext(ServiceContext);
+  const [users, setUsers] = useState([] as User[]);
+  const { userService } = useContext(ServiceContext);
 
-  React.useEffect(() => {
-    userService.getUsers().then(users => {
-      setUsers(users);
-    })
-  });
+  useEffect(() => {
+    userService.getUsers()
+      .then(users => {
+        setUsers(users);
+      })
+  }, [userService]);
 
   const buildUserList = () => {
     if (!users || users.length === 0) {
-      return <span className='loading'>Loading... {process.env.REACT_APP_ENV}</span>;
+      return <span className='loading'>Loading...</span>;
     }
     const userList = users.map(user => {
       return <li key={'user-' + user.username}>{user.username}: {user.firstname} {user.lastname}</li>
