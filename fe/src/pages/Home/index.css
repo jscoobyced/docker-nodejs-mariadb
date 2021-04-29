@@ -1,5 +1,9 @@
 header {
   flex: 2;
+}
+
+header,
+footer {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -17,8 +21,12 @@ main {
   padding-left: 1em;
 }
 
-main > span {
+main>span {
   margin-top: 1em;
+}
+
+span.loading {
+  padding-left: 2em;
 }
 
 footer {
