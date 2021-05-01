@@ -2,6 +2,26 @@ version: "3.7"
 
 services:
 
+  be:
+    build:
+      context: be/
+      target: development
+    volumes:
+      - type: bind
+        source: ./be/src
+        target: /opt/dnm/src
+    ports:
+      - "3002:3002"
+    environment:
+      NODE_ENV: development
+      DB_HOST: db
+      DB_USER: app_user
+      DB_PASSWORD: oas87nyfrc8odvs7
+      DB_NAME: my_app
+      BACK_END_API_PORT: 3002
+      FRONT_END_API_HOST: localhost
+      FRONT_END_API_PORT: 3000
+
   fe:
     build:
       context: fe/
@@ -15,24 +35,10 @@ services:
         target: /opt/dnm/public
     ports:
       - "3000:3000"
-
-  be:
-    build:
-      context: be/
-      target: development
-    volumes:
-      - type: bind
-        source: ./be/src
-        target: /opt/dnm/src
-    ports:
-      - "3001:3001"
     environment:
-      NODE_ENV: development
-      DB_HOST: db
-      DB_USER: app_user
-      DB_PASSWORD: oas87nyfrc8odvs7
-      DB_NAME: my_app
-
+      REACT_APP_BACK_END_API_HOST: localhost
+      REACT_APP_BACK_END_API_PORT: 3002
+    
 #  db:
 #    image: mariadb:latest
 #    restart: unless-stopped
