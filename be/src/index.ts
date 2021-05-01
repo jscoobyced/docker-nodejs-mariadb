@@ -1,16 +1,20 @@
 import express from 'express';
 import { routes } from './routes';
 import cors from 'cors';
+import { allowedOrigins } from './utils/cors';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
 
 const app = express();
-const PORT = 3001;
+const PORT = process.env.BACK_END_API_PORT || 3001;
+
+console.log(allowedOrigins());
 
 const corsOptions = {
-  origin: `http://${process.env.FRONT_END_API_HOST}:${process.env.FRONT_END_API_PORT}`,
+  origin: allowedOrigins(),
   optionsSuccessStatus: 200,
+  methods: ['GET', 'POST', 'PUT'],
 };
 
 app.use(cors(corsOptions));

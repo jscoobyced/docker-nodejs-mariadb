@@ -73,3 +73,23 @@ docker-compose up -d
 from the root folder of this project. This will start the development environment for both Front-End and Back-End, hot-reload enabled.
 
 Any change made in Front-End and Back-End will be instantly reflected.
+
+You can also run
+```
+yarn start
+```
+but make sure you have the back-end running too. See section [Stand-alone development mode](/be/README.md).
+
+## Configuration
+
+When running the application using `yarn` by command line, the file [./.env](./env) is used to load the configuration:
+```
+REACT_APP_BACK_END_API_HOST='localhost'
+REACT_APP_BACK_END_API_PORT=3001
+REACT_APP_WEBSITE_DESCRIPTION='React Application with ExpressJS and MariaDB back-end'
+REACT_APP_WEBSITE_TITLE='React Application'
+```
+
+When running in `docker-compose`, you can override the above configuration in the `environment` section.
+
+You can see that the [docker-compose.yml](../docker-compose.yml) actually binds the port 3002 to the back-end API as a demonstration.
