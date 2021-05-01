@@ -11,14 +11,20 @@
     "express": "^4.17.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.14.0",
+    "@babel/preset-env": "^7.14.0",
+    "@babel/preset-typescript": "^7.13.0",
     "@types/cors": "^2.8.10",
     "@types/express": "^4.17.11",
+    "@types/jest": "^26.0.23",
     "@types/node": "^14.14.41",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
     "@typescript-eslint/parser": "^4.22.0",
+    "babel-jest": "^26.6.3",
     "eslint": "^7.25.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.0",
+    "jest": "^26.6.3",
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
     "ts-node": "^9.1.1",
@@ -27,6 +33,26 @@
   "scripts": {
     "build": "tsc",
     "start": "nodemon src/index.ts",
-    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix"
+    "lint": "eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
+    "test": "jest",
+    "test:coverage": "jest --coverage"
+  },
+  "eslintConfig": {
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+      "ecmaVersion": 2020,
+      "sourceType": "module"
+    },
+    "extends": [
+      "plugin:@typescript-eslint/recommended",
+      "prettier",
+      "plugin:prettier/recommended"
+    ],
+    "rules": {}
+  },
+  "jest": {
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/src/index.tsx"
+    ]
   }
 }
