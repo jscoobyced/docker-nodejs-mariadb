@@ -10,7 +10,7 @@ export const getUserByUsername: Handler = (req, res) => {
   const { username } = req.query;
   const safeUsername = username ? (username as string) : '';
   const user = userByUsername(safeUsername);
-  const response = user ? `User ${user.username}` : 'No user found';
+  const response = !!user ? user : {};
   res.send(response);
 };
 
@@ -19,6 +19,7 @@ export const addUser: Handler = (req, res) => {
   if (!username?.trim() || !firstname?.trim() || !lastname?.trim()) {
     return res.status(400).send(ERRORS.BAD_USER_INFORMATION);
   }
-  addNewUser({ username, firstname, lastname });
-  res.status(201).send('User created');
+  const result = addNewUser({ username, firstname, lastname });
+  const response = 'User created. User Id: ' + result;
+  res.status(201).send(response);
 };

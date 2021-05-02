@@ -12,7 +12,7 @@ export const routes: Route[] = [
   },
   {
     method: 'post',
-    path: '/users',
+    path: '/user',
     middleware: [],
     handler: addUser,
   },

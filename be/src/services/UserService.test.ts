@@ -1,4 +1,4 @@
-import { User } from '../models/types';
+import { User } from '../models/user';
 import { addNewUser, userByUsername, getAllUsers } from './UserService';
 
 test('gets all users', () => {

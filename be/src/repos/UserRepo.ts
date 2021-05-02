@@ -1,4 +1,4 @@
-import { User } from '../models/types';
+import { User } from '../models/user';
 
 const users: User[] = [
   {
@@ -21,6 +21,7 @@ export const getUserByUsername = (username: string): User | undefined => {
   return users.find((user) => user.username === username);
 };
 
-export const addUser = (user: User): void => {
+export const addUser = (user: User): number => {
   users.push(user);
+  return users.length;
 };
