@@ -1,15 +1,8 @@
-import { Route } from './models/types';
-import { home } from './handlers/index';
-import { getUsers, addUser, getUserByUsername } from './handlers/user';
-import { requestLogger } from './middleware/logger';
+import { Route } from '../models/types';
+import { getUsers, addUser, getUserByUsername } from '../handlers/user';
+import { requestLogger } from '../middleware/logger';
 
 export const routes: Route[] = [
-  {
-    method: 'get',
-    path: '/',
-    middleware: [],
-    handler: home,
-  },
   {
     method: 'post',
     path: '/user',
