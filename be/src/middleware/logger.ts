@@ -1,6 +1,8 @@
 import { RequestHandler as Middleware } from 'express';
 
 export const requestLogger: Middleware = (req, res, next) => {
-  console.log(req.path);
+  if (process.env.NODE_ENV !== 'test') {
+    console.log(req.path, req.query, req.body);
+  }
   next();
 };

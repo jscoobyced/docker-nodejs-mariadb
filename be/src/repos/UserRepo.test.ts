@@ -1,4 +1,4 @@
-import { User } from '../models/types';
+import { User } from '../models/user';
 import { addUser, getUserByUsername, getUsers } from './UserRepo';
 
 test('gets all users', () => {
