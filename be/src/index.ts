@@ -9,8 +9,6 @@ dotenv.config();
 const app = express();
 const PORT = process.env.BACK_END_API_PORT || 3001;
 
-console.log(allowedOrigins());
-
 const corsOptions = {
   origin: allowedOrigins(),
   optionsSuccessStatus: 200,

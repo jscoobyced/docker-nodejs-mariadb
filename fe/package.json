@@ -31,7 +31,8 @@
   },
   "jest": {
     "coveragePathIgnorePatterns": [
-      "<rootDir>/src/index.tsx"
+      "<rootDir>/src/index.tsx",
+      "<rootDir>/src/index-mock.tsx"
     ]
   },
   "browserslist": {

@@ -1,5 +1,6 @@
 import { getAllUsers, addNewUser, userByUsername } from '../services/UserService';
 import { Handler } from '../models/types';
+import { ERRORS } from '../config/constants';
 
 export const getUsers: Handler = (req, res) => {
   res.send(getAllUsers());
@@ -16,7 +17,7 @@ export const getUserByUsername: Handler = (req, res) => {
 export const addUser: Handler = (req, res) => {
   const { username, firstname, lastname } = req.body;
   if (!username?.trim() || !firstname?.trim() || !lastname?.trim()) {
-    return res.status(400).send('Bad user information');
+    return res.status(400).send(ERRORS.BAD_USER_INFORMATION);
   }
   addNewUser({ username, firstname, lastname });
   res.status(201).send('User created');
