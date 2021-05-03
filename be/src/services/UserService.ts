@@ -1,14 +1,14 @@
 import { User } from '../models/user';
-import { getUsers, addUser, getUserByUsername } from '../repos/UserRepo';
+import { getUsers, addUser, getUserByUsername } from '../repos/user';
 
-export const getAllUsers = (): User[] => {
+export const getAllUsers = async (): Promise<User[]> => {
   return getUsers();
 };
 
-export const addNewUser = (user: User): number => {
+export const addNewUser = async (user: User): Promise<number> => {
   return addUser(user);
 };
 
-export const userByUsername = (username: string): User | undefined => {
+export const userByUsername = async (username: string): Promise<User | undefined> => {
   return getUserByUsername(username);
 };

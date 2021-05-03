@@ -38,46 +38,46 @@ const createMock = (username?: string, firstname?: string, lastname?: string, st
   };
 };
 
-test('getUsers is called', () => {
+test('getUsers is called', async () => {
   const { mockRequest, mockResponse } = createMock();
-  getUsers(mockRequest, mockResponse);
+  await getUsers(mockRequest, mockResponse);
   expect(mockResponse.send).toHaveBeenCalledTimes(1);
   expect(mockUserService.getAllUsers).toHaveBeenCalledTimes(1);
 });
 
-test('userByUsername is called', () => {
+test('userByUsername is called', async () => {
   const { mockRequest, mockResponse } = createMock('John');
-  getUserByUsername(mockRequest, mockResponse);
+  await getUserByUsername(mockRequest, mockResponse);
   expect(mockResponse.send).toHaveBeenCalledTimes(1);
   expect(mockMe).toHaveBeenCalledTimes(1);
 });
 
-test('userByUsername with empty username', () => {
+test('userByUsername with empty username', async () => {
   const { mockRequest, mockResponse } = createMock();
-  getUserByUsername(mockRequest, mockResponse);
+  await getUserByUsername(mockRequest, mockResponse);
   expect(mockResponse.send).toHaveBeenCalledTimes(1);
   expect(mockMe).toHaveBeenCalledTimes(1);
 });
 
-test('userByUsername with username not found', () => {
+test('userByUsername with username not found', async () => {
   const { mockRequest, mockResponse } = createMock('EMPTY');
-  getUserByUsername(mockRequest, mockResponse);
+  await getUserByUsername(mockRequest, mockResponse);
   expect(mockResponse.send).toHaveBeenCalledTimes(1);
   expect(mockMe).toHaveBeenCalledTimes(0);
 });
 
-test('addNewUser is called', () => {
+test('addNewUser is called', async () => {
   const { mockRequest, mockResponse } = createMock('John', 'John', 'Smith');
-  addUser(mockRequest, mockResponse);
+  await addUser(mockRequest, mockResponse);
   expect(mockResponse.status).toHaveBeenCalledTimes(1);
   expect(mockResponse.status).toHaveBeenCalledWith(201);
   expect(mockUserService.addNewUser).toHaveBeenCalledTimes(1);
 });
 
-test('addNewUser fails with missing username', () => {
+test('addNewUser fails with missing username', async () => {
   const statusSend = jest.fn();
   const { mockRequest, mockResponse } = createMock('', '', '', statusSend);
-  addUser(mockRequest, mockResponse);
+  await addUser(mockRequest, mockResponse);
   expect(mockResponse.status).toHaveBeenCalledTimes(1);
   expect(mockResponse.status).toHaveBeenCalledWith(400);
   expect(statusSend).toHaveBeenCalledWith(ERRORS.BAD_USER_INFORMATION);
