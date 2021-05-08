@@ -10,7 +10,7 @@ on:
 
 jobs:
   build:
-
+    name: front-end
     runs-on: ubuntu-latest
 
     strategy:
@@ -27,3 +27,9 @@ jobs:
         cd fe
         yarn install --frozen-lockfile
         yarn test:coverage
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v1
+      with:
+        files: ./fe/coverage/clover.xml
+        fail_ci_if_error: true
+        verbose: true

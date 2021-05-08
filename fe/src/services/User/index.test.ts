@@ -23,6 +23,6 @@ describe('User Service', () => {
   it('gets the user from API', async () => {
     const users = await UserService().getUsers();
     expect(users).toBeDefined();
-    expect(users).toEqual([]);
+    expect(users).toEqual([mockUser]);
   });
 });
