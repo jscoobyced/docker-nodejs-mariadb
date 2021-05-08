@@ -1,5 +1,1 @@
-export interface User {
-  username: string;
-  firstname: string;
-  lastname: string;
-}
+export type User = { userId?: number; username: string; firstname: string; lastname: string };

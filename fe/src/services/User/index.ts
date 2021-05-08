@@ -7,8 +7,9 @@ export interface IUserService {
 
 export const UserService = (): IUserService => {
   const getUsers = async (): Promise<User[]> => {
-    const response = await fetch(`${BACK_END_URL}${BACK_END_SERVICES_ENDPOINTS.getUsers}`);
-    return response.json();
+    return fetch(`${BACK_END_URL}${BACK_END_SERVICES_ENDPOINTS.getUsers}`).then((data) => {
+      return data.json();
+    });
   }
 
   return {
