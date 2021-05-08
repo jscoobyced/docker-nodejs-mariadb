@@ -13,8 +13,8 @@ const formatMessage = (message: string): string => {
 };
 
 const error = (message: string, error?: Error): void => {
-  console.log(formatMessage(message));
-  console.log(error);
+  console.error(formatMessage(message));
+  console.error(error);
 };
 
 const info = (message: string): void => {

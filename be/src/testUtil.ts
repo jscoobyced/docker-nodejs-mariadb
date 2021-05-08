@@ -5,13 +5,13 @@ interface IRequestResponse {
   mockResponse: Response;
 }
 
-export const createDefaultMock = (statusSend?: () => void): IRequestResponse => {
+export const createDefaultMock = (): IRequestResponse => {
   const mockRequest = (jest.fn() as unknown) as Request;
   const mockResponse = (jest.fn() as unknown) as Response;
   mockResponse.send = jest.fn();
   mockResponse.status = jest.fn().mockImplementation(() => {
     return {
-      send: statusSend || jest.fn(),
+      send: jest.fn(),
     };
   });
 

@@ -23,8 +23,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended }));
 
 routes.forEach((route) => {
-  const { method, path, middleware, handler } = route;
-  app[method](path, ...middleware, handler);
+  const { version, method, path, middleware, handler } = route;
+  app[method](`${version}${path}`, ...middleware, handler);
 });
 
 if (process.env.NODE_ENV !== 'test') {

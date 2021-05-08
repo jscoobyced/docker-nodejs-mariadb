@@ -1,5 +1,5 @@
-import { Route } from '../models/types';
-import { home } from '../handlers/index';
+import { Route } from '../models/route';
+import { home } from '../controllers/home/home';
 
 export const routes: Route[] = [
   {
