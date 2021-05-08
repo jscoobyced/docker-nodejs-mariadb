@@ -14,4 +14,7 @@ coverage:
     patch: no
     changes: no
 
-comment: on
+comment:
+  layout: "diff"
+  behavior: default
+  require_changes: no
