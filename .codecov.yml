@@ -1,0 +1,15 @@
+codecov:
+
+coverage:
+  precision: 2
+  round: down
+  range: "70...90"
+
+  status:
+    project: yes
+    patch: yes
+    changes: no
+    status:
+      patch:
+        default:
+          threshold: 0.1%
