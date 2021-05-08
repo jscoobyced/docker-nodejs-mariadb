@@ -7,12 +7,12 @@ import { ControllerResponse } from '../../models/common';
 export const getUsers: Handler = async (req, res) => {
   const response: ControllerResponse = {};
   return UserService.getUsers().then((result) => {
-    if (result.error !== undefined) {
+    if (!!result.error) {
       response.error = {
         message: result.error.message,
       };
       res.status(400).send(response);
-    } else if (result.data === undefined || (result.data as User[]).length === 0) {
+    } else if (!result.data || (result.data as User[]).length === 0) {
       response.error = {
         code: API_ERROR_CODES.NO_USER_FOUND,
       };
