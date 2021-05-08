@@ -3,6 +3,8 @@ import { routes } from './routes/routes';
 import cors from 'cors';
 import { allowedOrigins } from './utils/cors';
 import * as dotenv from 'dotenv';
+import { startMySQL, stopMySQL } from './repos';
+import { logger } from './utils/logger';
 
 dotenv.config();
 
@@ -21,13 +23,17 @@ app.use(express.json());
 app.use(express.urlencoded({ extended }));
 
 routes.forEach((route) => {
-  const { method, path, middleware, handler } = route;
-  app[method](path, ...middleware, handler);
+  const { version, method, path, middleware, handler } = route;
+  app[method](`${version}${path}`, ...middleware, handler);
 });
 
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
-    console.log(`Express with Typescript! http://localhost:${PORT}`);
+    logger.info(`Started Express at http://localhost:${PORT}`);
+    startMySQL();
+  });
+  process.on('exit', () => {
+    stopMySQL();
   });
 }
 

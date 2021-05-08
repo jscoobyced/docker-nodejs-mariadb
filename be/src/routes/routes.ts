@@ -1,5 +1,5 @@
-import { Route } from '../models/types';
-import { routes as indexRoutes } from '.';
+import { Route } from '../models/route';
+import { routes as homeRoutes } from './home';
 import { routes as userRoutes } from './user';
 
-export const routes: Route[] = [...indexRoutes, ...userRoutes];
+export const routes: Route[] = [...homeRoutes, ...userRoutes];

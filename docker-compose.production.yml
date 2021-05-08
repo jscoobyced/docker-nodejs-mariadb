@@ -6,6 +6,7 @@ services:
     build:
       context: be/
       target: production
+    restart: unless-stopped
     ports:
       # This needs to match BACK_END_API_PORT environment variable
       - "3001:3001"
@@ -23,25 +24,26 @@ services:
     build:
       context: fe/
       target: production
+    restart: unless-stopped
     ports:
       # Change port 3000 to anavailable port that will be
       # mapped in your reverse-proxy
       - "3000:80"
     
-#  db:
-#    image: mariadb:latest
-#    restart: unless-stopped
-#    environment:
-#      MYSQL_DATABASE: my_app
-#      MYSQL_USER: app_user
-#      MYSQL_PASSWORD: oas87nyfrc8odvs7
-#      MYSQL_RANDOM_ROOT_PASSWORD: '1'
-#    volumes:
-#      - type: bind
-#        source: ./db
-#        target: "/var/lib/mysql"
+  db:
+    image: mariadb:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: my_app
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: oas87nyfrc8odvs7
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - type: bind
+        source: ./db
+        target: "/var/lib/mysql"
 
 volumes:
   be:
   fe:
-#  db:
+  db:

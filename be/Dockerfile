@@ -4,7 +4,7 @@ WORKDIR /opt/dnm
 COPY *.json ./
 COPY yarn.lock ./
 COPY src/index.html ./
-RUN yarn
+RUN yarn install
 EXPOSE 3001
 
 FROM base as development

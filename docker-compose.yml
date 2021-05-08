@@ -6,6 +6,7 @@ services:
     build:
       context: be/
       target: development
+    restart: unless-stopped
     volumes:
       - type: bind
         source: ./be/src
@@ -26,6 +27,7 @@ services:
     build:
       context: fe/
       target: development
+    restart: unless-stopped
     volumes:
       - type: bind
         source: ./fe/src
@@ -39,20 +41,20 @@ services:
       REACT_APP_BACK_END_API_HOST: localhost
       REACT_APP_BACK_END_API_PORT: 3002
     
-#  db:
-#    image: mariadb:latest
-#    restart: unless-stopped
-#    environment:
-#      MYSQL_DATABASE: my_app
-#      MYSQL_USER: app_user
-#      MYSQL_PASSWORD: oas87nyfrc8odvs7
-#      MYSQL_RANDOM_ROOT_PASSWORD: '1'
-#    volumes:
-#      - type: bind
-#        source: ./db
-#        target: "/var/lib/mysql"
+  db:
+    image: mariadb:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: my_app
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: oas87nyfrc8odvs7
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - type: bind
+        source: ./db
+        target: "/var/lib/mysql"
 
 volumes:
   be:
   fe:
-#  db:
+  db:

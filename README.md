@@ -6,7 +6,7 @@ This is all you need to build a full website using ReactJS and NodeJS.
 
 ### Development mode
 
-You can simply run `docker-compse up -d` on the root folder and it will start a hot-reload version of both Front-End and Back-End. This means if you change anything on either side, it will immediately be reflected. Depending on what you change you might still have to refresh the browser page though.
+You can simply run `docker-compose up -d` on the root folder and it will start a hot-reload version of both Front-End and Back-End. This means if you change anything on either side, it will immediately be reflected. Depending on what you change you might still have to refresh the browser page though.
 
 You can then open the application at http://localhost:3000.
 
