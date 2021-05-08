@@ -14,4 +14,4 @@ coverage:
     patch: no
     changes: no
 
-comment: off
+comment: on
