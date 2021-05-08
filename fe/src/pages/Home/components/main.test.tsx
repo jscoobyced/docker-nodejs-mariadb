@@ -5,13 +5,15 @@ import { Main } from './main';
 
 const userService = MockUserService();
 
-test('renders loaded data', async () => {
-  const { unmount } = render(<ServiceContext.Provider value={{ userService }}>
-    <Main />
-  </ServiceContext.Provider>);
-  await waitFor(() => {
-    const listElement = screen.getByText(/John/i);
-    expect(listElement).toBeInTheDocument();
-  }, { interval: 100, timeout: 1000 });
-  unmount();
-});
+describe('Main component', () => {
+  it('can render', async () => {
+    const { unmount } = render(<ServiceContext.Provider value={{ userService }}>
+      <Main />
+    </ServiceContext.Provider>);
+    await waitFor(() => {
+      const listElement = screen.getByText(/John/i);
+      expect(listElement).toBeInTheDocument();
+    }, { interval: 100, timeout: 1000 });
+    unmount();
+  })
+})
