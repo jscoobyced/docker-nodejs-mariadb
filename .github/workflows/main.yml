@@ -30,7 +30,7 @@ jobs:
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
-        files: ./fe/coverage/clover.xml
+        files: ./fe/coverage/coverage-final.json
         fail_ci_if_error: true
         verbose: true
   be:
@@ -54,6 +54,6 @@ jobs:
     - name: Upload coverage to Codecov
       uses: codecov/codecov-action@v1
       with:
-        files: ./be/coverage/clover.xml
+        files: ./be/coverage/coverage-final.json
         fail_ci_if_error: true
         verbose: true
