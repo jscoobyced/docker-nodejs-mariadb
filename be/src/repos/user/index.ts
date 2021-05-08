@@ -33,8 +33,21 @@ export const getUsers = async (): Promise<User[]> => {
 };
 
 export const getUserByUsername = async (username: string): Promise<User | void> => {
-  const user = users.find((user) => user.username === username);
-  return Promise.resolve(user);
+  const pool = getPool();
+  return pool
+    .promise()
+    .query("SELECT 1 AS UserId, 'John' AS Username, 'John' AS Firstname, 'Smith' AS Lastname")
+    .then(([rows]) => {
+      const users = (<RowDataPacket[]>rows).map((row) => {
+        return {
+          userId: row.UserId,
+          username,
+          firstname: row.Firstname,
+          lastname: row.Lastname,
+        };
+      });
+      return users[0];
+    });
 };
 
 export const addUser = async (user: User): Promise<User> => {
