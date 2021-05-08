@@ -49,5 +49,8 @@
   },
   "devDependencies": {
     "react-app-rewired": "^2.1.8"
+  },
+  "resolutions": {
+    "hosted-git-info": "^2.8.9"
   }
 }
