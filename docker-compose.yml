@@ -17,7 +17,7 @@ services:
       NODE_ENV: development
       DB_HOST: db
       DB_USER: app_user
-      DB_PASSWORD: oas87nyfrc8odvs7
+      DB_PASSWORD: some_great_password
       DB_NAME: my_app
       BACK_END_API_PORT: 3002
       FRONT_END_API_HOST: localhost
@@ -42,18 +42,17 @@ services:
       REACT_APP_BACK_END_API_PORT: 3002
     
   db:
-    image: mariadb:latest
+    build:
+      context: db/
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: my_app
       MYSQL_USER: app_user
-      MYSQL_PASSWORD: oas87nyfrc8odvs7
+      MYSQL_PASSWORD: some_great_password
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
-    volumes:
-      - type: bind
-        source: ./db
-        target: "/var/lib/mysql"
-
+    ports:
+      - "3306:3306"
+  
 volumes:
   be:
   fe:
