@@ -1,4 +1,3 @@
-import { RowDataPacket } from 'mysql2';
 import { User } from '../../models/user';
 import { db_rows } from '../../utils/db';
 import { getPool } from '../mysql';
