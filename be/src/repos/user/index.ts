@@ -1,5 +1,6 @@
 import { RowDataPacket } from 'mysql2';
 import { User } from '../../models/user';
+import { db_rows } from '../../utils/db';
 import { getPool } from '../mysql';
 
 const users: User[] = [
@@ -19,31 +20,33 @@ export const getUsers = async (): Promise<User[]> => {
   const pool = getPool();
   return pool
     .promise()
-    .query("SELECT 'John' AS Username, 'John' AS Firstname, 'Smith' AS Lastname")
-    .then(([rows]) => {
-      const users = (<RowDataPacket[]>rows).map((row) => {
+    .query('CALL get_users_v1(true)')
+    .then(([result]) => {
+      const rows = db_rows(result);
+      const users = rows.map((row) => {
         return {
-          username: row.Username,
-          firstname: row.Firstname,
-          lastname: row.Lastname,
+          userId: row.id,
+          username: row.username,
+          firstname: row.firstname,
+          lastname: row.lastname,
         };
       });
       return users;
     });
 };
 
-export const getUserByUsername = async (username: string): Promise<User | void> => {
-  const pool = getPool();
-  return pool
+export const getUserByUsername = async (username: string): Promise<User | never[]> => {
+  return getPool()
     .promise()
-    .query("SELECT 1 AS UserId, 'John' AS Username, 'John' AS Firstname, 'Smith' AS Lastname")
-    .then(([rows]) => {
-      const users = (<RowDataPacket[]>rows).map((row) => {
+    .query('CALL get_user_by_username_v1(?)', username)
+    .then(([result]) => {
+      const rows = db_rows(result);
+      const users = rows.map((row) => {
         return {
-          userId: row.UserId,
-          username,
-          firstname: row.Firstname,
-          lastname: row.Lastname,
+          userId: row.id,
+          username: row.username,
+          firstname: row.firstname,
+          lastname: row.lastname,
         };
       });
       return users[0];
