@@ -28,8 +28,7 @@ services:
     
   db:
     image: mariadb:latest
-    restart: unless-stopped
-    
+    restart: unless-stopped    
     environment:
       MYSQL_DATABASE: my_app
       MYSQL_USER: app_user
@@ -39,6 +38,4 @@ services:
       - "./my_data:/var/lib/mysql"
 
 volumes:
-  be:
-  fe:
   db:
