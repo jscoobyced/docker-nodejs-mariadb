@@ -3,6 +3,9 @@ node_modules
 build
 coverage
 
+# Database
+my_data
+
 # For when we copy from/to some code
 *.tar.gz
 *.tgz

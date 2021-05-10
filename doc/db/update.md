@@ -27,3 +27,11 @@ You can directly add any data change in the `/db/sql/data/dev.sql`
 If you want to enable a new environment (like qa or production), you will need to:
 - create a new Dockerfile in `/db/` folder to handle the files needed for initial deployment (or to be used to reset the environment)
 - create or update the `/docker-compose.environment.yml`
+
+### Integration
+
+Once you have deployed your database scripts from the `./db/sql/update/` folder to production, move them to the `./db/sql/update/` folder as the current version:
+- update the `create.sql` script by adding the content of `update.sql`. You should empty the `update.sql` afterwards.
+- move the stored procedure files to the `stored_procedure` folder
+
+A good automation would be to perform the above automatically after deployment.
