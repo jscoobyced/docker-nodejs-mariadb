@@ -7,5 +7,9 @@ Front-End
 
 Back-End
 1. [Handlers](./be/handlers.md)
-1. [Routes](./be/routes.md)
-1. [Middleware](./be/middleware.md)
+2. [Routes](./be/routes.md)
+3. [Middleware](./be/middleware.md)
+
+Database
+1. [Folder structure](./db/folders.md)
+2. [Updating database](./db/update.md)
