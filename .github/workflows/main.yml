@@ -97,7 +97,7 @@ jobs:
           push: true
           tags: jscdroiddev/docker-nodejs-mariadb-fe:${{ env.DOCKER_TAG }}
 
-  build-fe:
+  build-be:
     name: build-be
     needs: test-be
     runs-on: ubuntu-latest
