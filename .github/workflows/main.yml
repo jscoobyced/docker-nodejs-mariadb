@@ -140,6 +140,6 @@ jobs:
       - name: Remote deploy
         run: |
           chmod u+x "${GITHUB_WORKSPACE}/.github/docker-deploy.sh"
-          "${GITHUB_WORKSPACE}/.github/docker-tag.sh" ${{ secrets.DEPLOY_USERNAME }} ${{ secrets.DEPLOY_SERVER }}
+          "${GITHUB_WORKSPACE}/.github/docker-deploy.sh" ${{ secrets.DEPLOY_USERNAME }} ${{ secrets.DEPLOY_SERVER }}
 
 
