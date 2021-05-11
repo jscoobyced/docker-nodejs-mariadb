@@ -13,3 +13,6 @@ Back-End
 Database
 1. [Folder structure](./db/folders.md)
 2. [Updating database](./db/update.md)
+
+Deployment
+1. [How to deploy](./deployment.md)

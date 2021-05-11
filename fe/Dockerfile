@@ -14,6 +14,7 @@ CMD ["yarn", "start"]
 
 FROM base as build-prod
 ENV NODE_ENV=production
+ENV REACT_APP_BACK_END_API_HOST='rochefolle.org'
 COPY src src
 COPY public public
 RUN yarn build

@@ -16,5 +16,8 @@ describe('CORS configuration', () => {
     process.env.FRONT_END_API_PORT = 'NaN';
     configuration = allowedOrigins();
     expect(configuration).toEqual(defaultOrigins);
+    process.env.FRONT_END_API_HOST = '*';
+    configuration = allowedOrigins();
+    expect(configuration).toEqual(['*']);
   });
 });
