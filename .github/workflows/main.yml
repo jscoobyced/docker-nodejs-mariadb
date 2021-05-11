@@ -65,7 +65,7 @@ jobs:
         verbose: true
 
   build-fe:
-    name: build-fe
+    name: test-fe
     needs: front-end
     runs-on: ubuntu-latest
 
@@ -98,7 +98,7 @@ jobs:
           tags: jscdroiddev/docker-nodejs-mariadb-fe:${{ env.DOCKER_TAG }}
 
   build-be:
-    name: build-be
+    name: test-be
     needs: test-be
     runs-on: ubuntu-latest
     steps:
