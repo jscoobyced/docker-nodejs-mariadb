@@ -12,5 +12,6 @@ then
   fi
 else
   DOCKER_TAG=${GHTAG}
+fi
 
 echo -e "DOCKER_TAG=${DOCKER_TAG}" >> $GITHUB_ENV
