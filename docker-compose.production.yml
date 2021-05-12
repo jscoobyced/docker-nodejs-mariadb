@@ -22,7 +22,9 @@ services:
     restart: unless-stopped
     ports:
       - "3000:80"
-    
+    environment:
+      REACT_APP_BACK_END_API_HOST: api.my-server.tld
+
   db:
     image: mariadb:latest
     restart: unless-stopped    
