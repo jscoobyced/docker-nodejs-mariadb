@@ -42,22 +42,26 @@ Above command will:
 7. Test that you can SSH to the remote server without requiring password.
 
 You need to create 2 Github Action Secrets from the generated files:
-1. Secret name: `DEPLOY_KNOWN_HOST`. The value is the last entry in the `~/.ssh/known_hosts` from your machine. It should look like:
+1. Secret name: `DEPLOY_KNOWN_HOST`. The value is the last 2 entries in the `~/.ssh/known_hosts` from your machine. It should look like:
 ```
 |1|abcde/bla5/usdhnfcgsdhkjhUHIuLYGlbsidugbilYBiuoibfd= ecdsa-sha2-nistp256 
 AAAAEWYTVDLSHDVDSOUYVSDkuavufysdvbkafdgvasgdfvaytcVYTCAIYTCDULODVUTOSvaostvdfouysvbasysgtdvftiV
 UFWTRCXSLTUCiytc/k=
+|1|abcde/bla5/IUBGUTYbfJYtbYbvuyBYUBVJTfhtjyv= ecdsa-sha2-nistp256 
+AAAAEWYTVDLSHDVDuygbYUTfbeSxyTvcItBOUyuobYTRbrVtYRctubiuYfrvdTrbcuyivbasysgtdvftiV
+UFWTRCXSLTUCiytc/k=
 ```
 If you have SSH-ed to another server after performing the steps from the previous section, you'll have to find the proper entry or you won't be able to authenticate during deployment.
-2. Secret name: `DEPLOY_KEY`. The content of the `~/.ssh/gh` private keys file should be converted to RSA. The file content is like this:
+2. Secret name: `DEPLOY_KEY`. The content of the `~/.ssh/gh` private keys file. The file content is like this:
 ```
 -----BEGIN RSA PRIVATE KEY-----
 XXXXX
 -----END RSA PRIVATE KEY-----
+```
 
 ## Update production information
 
-In the `/fe/.env.production.local` file, update the values to your production values. You can change only the values to override from the `/fe/.env` file. For example, to update the back-end API hostname:
+In the `/docker-compose.production.yml` file, update the environment variables to your production values. For example, to update the back-end API hostname in the `fe` container:
 ```
 REACT_APP_BACK_END_API_HOST='api.my-server.tld'
 ```
