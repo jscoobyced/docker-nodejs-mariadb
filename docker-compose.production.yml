@@ -6,32 +6,29 @@ services:
     image: jscdroiddev/docker-nodejs-mariadb-be:dev
     restart: unless-stopped
     ports:
-      # This needs to match BACK_END_API_PORT environment variable
       - "3001:3001"
     environment:
       NODE_ENV: production
       DB_HOST: db
-      DB_USER: ${SERVER_DB_USER}
+      DB_USER: my_user
       DB_PASSWORD: ${SERVER_DB_PASSWORD}
-      DB_NAME: ${SERVER_DB_NAME}
+      DB_NAME: my_app
       BACK_END_API_PORT: 3001
-      FRONT_END_API_HOST: ${FRONT_END_API_HOST}
-      FRONT_END_API_PORT: ${FRONT_END_API_PORT}
+      FRONT_END_API_HOST: my-server.tld
+      FRONT_END_API_PORT: "80, 443"
 
   fe:
     image: jscdroiddev/docker-nodejs-mariadb-fe:dev
     restart: unless-stopped
     ports:
-      # Change port 3000 to anavailable port that will be
-      # mapped in your reverse-proxy
       - "3000:80"
     
   db:
     image: mariadb:latest
     restart: unless-stopped    
     environment:
-      MYSQL_DATABASE: ${SERVER_DB_NAME}
-      MYSQL_USER: ${SERVER_DB_USER}
+      MYSQL_DATABASE: my_app
+      MYSQL_USER: my_user
       MYSQL_PASSWORD: ${SERVER_DB_PASSWORD}
       MYSQL_RANDOM_ROOT_PASSWORD: '1'
     volumes:
