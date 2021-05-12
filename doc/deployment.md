@@ -61,8 +61,10 @@ XXXXX
 
 ## Update production information
 
-In the `/docker-compose.production.yml` file, update the environment variables to your production values. For example, to update the back-end API hostname in the `fe` container:
+In the `/docker-compose.production.yml` file, update the environment variables to your production values (i.e. the server name or port).
+
+In the `/fe/.env.production` file, override the environment variables of the `/fe/.env` file for your production settings.
+For example, to update the back-end API hostname in the `fe` container:
 ```
 REACT_APP_BACK_END_API_HOST='api.my-server.tld'
 ```
-
