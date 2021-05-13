@@ -1,7 +1,7 @@
 #!/bin/bash
 
 DTFMT=$(date +%Y%m%d-%H%M%S)
-UPDATE_FOLDER="${HOME}/db/updates/${DTFMT}"
+UPDATE_FOLDER="~/db/updates/${DTFMT}"
 ssh "$1@$2" "mkdir -p ${UPDATE_FOLDER}"
 scp ./db/sql/update/update.sql "$1@$2:${UPDATE_FOLDER}/"
 cat ./db/sql/update/stored_procedure/*.sql > stored_procedures.sql
