@@ -108,7 +108,7 @@ jobs:
       - name: Create docker tag variable
         run: |
           chmod u+x "${GITHUB_WORKSPACE}/.github/docker-tag.sh"
-          "${GITHUB_WORKSPACE}/.github/docker-tag.sh"
+          "${GITHUB_WORKSPACE}/.github/docker-env.sh"
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -132,14 +132,20 @@ jobs:
   deploy:
     needs: [build-fe, build-be]
     runs-on: ubuntu-latest
-    if: github.event_name == 'release' && github.event.action == 'created'
+    #if: github.event_name == 'release' && github.event.action == 'created'
 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Remote deploy
+
+        - name: Remote deploy
         run: |
           chmod u+x "${GITHUB_WORKSPACE}/.github/docker-deploy.sh"
-          "${GITHUB_WORKSPACE}/.github/docker-deploy.sh" "${{ secrets.SERVER_DB_PASSWORD }}" "${{ secrets.DEPLOY_KEY }}" "${{ secrets.DEPLOY_KNOWN_HOST }}" "${{ secrets.DEPLOY_USERNAME }}" "${{ secrets.DEPLOY_SERVER }}"
+          "${GITHUB_WORKSPACE}/.github/docker-deploy.sh" "${{ env.WITH_DB }}" "${{ secrets.SERVER_DB_PASSWORD }}" "${{ secrets.DEPLOY_KEY }}" "${{ secrets.DEPLOY_KNOWN_HOST }}" "${{ secrets.DEPLOY_USERNAME }}" "${{ secrets.DEPLOY_SERVER }}"
+
+        - name: Deploy database
+        run: |
+          chmod u+x "${GITHUB_WORKSPACE}/.github/db-update.sh"
+          "${GITHUB_WORKSPACE}/.github/db-update.sh" "${{ secrets.DEPLOY_USERNAME }}" "${{ secrets.DEPLOY_SERVER }}" "my_user" "${{ secrets.SERVER_DB_PASSWORD }}" "my_app"
 
 
