@@ -1,5 +1,6 @@
 #!/bin/bash
 
+ls -l ~/.ssh
 DTFMT=$(date +%Y%m%d-%H%M%S)
 UPDATE_FOLDER="db/updates/${DTFMT}"
 ssh "$1@$2" "mkdir ~/${UPDATE_FOLDER}/stored_procedure"
