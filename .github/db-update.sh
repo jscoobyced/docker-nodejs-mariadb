@@ -1,6 +1,5 @@
 #!/bin/bash
 
-ls -l ~/.ssh
 DTFMT=$(date +%Y%m%d-%H%M%S)
 UPDATE_FOLDER="db/updates/${DTFMT}"
 ssh "$1@$2" "mkdir ~/${UPDATE_FOLDER}/stored_procedure"
@@ -17,3 +16,5 @@ docker -H "ssh://${1}@${2}" exec -it docker-nodejs-mariadb_db_1 sh -c \
 
 docker -H "ssh://${1}@${2}" exec -it docker-nodejs-mariadb_db_1 sh -c \
   "mysql --host=localhost --port=3306 --protocol=tcp -u ${DBUSER} -p${DBPASS} ${DBNAME} < /home/${UPDATE_FOLDER}/stored_procedures.sql"
+
+rm -Rf "${HOME}/.ssh"
