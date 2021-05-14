@@ -13,59 +13,59 @@ on:
 
 jobs:
 
-#  test-fe:
-#    name: front-end
-#    runs-on: ubuntu-latest
+  test-fe:
+    name: front-end
+    runs-on: ubuntu-latest
 
-#    strategy:
-#      matrix:
-#        node-version: [14.x]
+    strategy:
+      matrix:
+        node-version: [14.x]
 
-#    steps:
-#    - uses: actions/checkout@v2
-#    - name: Use Node.js ${{ matrix.node-version }}
-#      uses: actions/setup-node@v1
-#      with:
-#        node-version: ${{ matrix.node-version }}
-#    - run: |
-#        cd fe
-#        yarn install --frozen-lockfile
-#        yarn test:coverage
-#    - name: Upload coverage to Codecov
-#      uses: codecov/codecov-action@v1
-#      with:
-#        files: ./fe/coverage/coverage-final.json
-#        fail_ci_if_error: true
-#        verbose: true
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: |
+          cd fe
+          yarn install --frozen-lockfile
+          yarn test:coverage
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          files: ./fe/coverage/coverage-final.json
+          fail_ci_if_error: true
+          verbose: true
 
-#  test-be:
-#    name: back-end
-#    runs-on: ubuntu-latest
+  test-be:
+    name: back-end
+    runs-on: ubuntu-latest
 
-#    strategy:
-#      matrix:
-#        node-version: [14.x]
+    strategy:
+      matrix:
+        node-version: [14.x]
 
-#    steps:
-#    - uses: actions/checkout@v2
-#    - name: Use Node.js ${{ matrix.node-version }}
-#      uses: actions/setup-node@v1
-#      with:
-#        node-version: ${{ matrix.node-version }}
-#    - run: |
-#        cd be
-#        yarn install --frozen-lockfile
-#        yarn test:coverage
-#    - name: Upload coverage to Codecov
-#      uses: codecov/codecov-action@v1
-#      with:
-#        files: ./be/coverage/coverage-final.json
-#        fail_ci_if_error: true
-#        verbose: true
+      steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: |
+          cd be
+          yarn install --frozen-lockfile
+          yarn test:coverage
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          files: ./be/coverage/coverage-final.json
+          fail_ci_if_error: true
+          verbose: true
 
   build-fe:
     name: build-fe
-#    needs: test-fe
+    needs: test-fe
     runs-on: ubuntu-latest
 
     steps:
@@ -97,7 +97,7 @@ jobs:
 
   build-be:
     name: build-be
-#    needs: test-be
+    needs: test-be
     runs-on: ubuntu-latest
 
     steps:
@@ -129,7 +129,7 @@ jobs:
   deploy:
     needs: [build-fe, build-be]
     runs-on: ubuntu-latest
-    #if: github.event_name == 'release' && github.event.action == 'created'
+    if: github.event_name == 'release' && github.event.action == 'created' && '${{ secrets.DEPLOY_KEY }}' != ''
 
     steps:
       - name: Checkout

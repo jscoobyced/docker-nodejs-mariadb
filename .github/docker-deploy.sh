@@ -13,7 +13,6 @@ DOCKER_SERVICES="fe be ${WITH_DB}"
 
 ssh "$4@$5" "mkdir -p ~/db/my_data && mkdir -p ~/db/updates"
 
-docker-compose -f docker-compose.production.yml -H "ssh://${4}@${5}" down
 docker -H "ssh://${4}@${5}" system prune -a -f
-docker-compose -f docker-compose.production.yml -H "ssh://${4}@${5}" pull ${DOCKER_SERVICES}
+docker-compose -f docker-compose.production.yml -H "ssh://${4}@${5}" pull
 SERVER_DB_PASSWORD="$1" docker-compose -f docker-compose.production.yml -H "ssh://${4}@${5}" up -d ${DOCKER_SERVICES}
