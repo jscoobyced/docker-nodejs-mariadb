@@ -11,7 +11,7 @@ WITH_DB=$(cat ./with_db)
 
 DOCKER_SERVICES="fe be ${WITH_DB}"
 
-ssh "$4@$5" "mkdir -p /home/db/my_data"
+ssh "$4@$5" "mkdir -p ~/db/my_data"
 
 docker-compose -f docker-compose.production.yml -H "ssh://${4}@${5}" down
 docker -H "ssh://${4}@${5}" system prune -a -f
