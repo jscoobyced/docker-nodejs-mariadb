@@ -14,4 +14,4 @@ WITH_DB=$(cat ./with_db)
 DOCKER_SERVICES="fe be ${WITH_DB}"
 
 docker-compose -f docker-compose.production.yml --env-file .env.production -H "ssh://${4}@${5}" pull
-docker-compose -f docker-compose.production.yml --env-file .env.production -H "ssh://${4}@${5}" up -d ${DOCKER_SERVICES}
+SERVER_DB_PASSWORD="$1" docker-compose -f docker-compose.production.yml --env-file .env.production -H "ssh://${4}@${5}" up -d ${DOCKER_SERVICES}
