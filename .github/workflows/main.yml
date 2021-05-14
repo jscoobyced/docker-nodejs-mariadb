@@ -12,6 +12,7 @@ on:
   workflow_dispatch:
 
 jobs:
+
   test-fe:
     name: front-end
     runs-on: ubuntu-latest
@@ -21,22 +22,21 @@ jobs:
         node-version: [14.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: |
-        cd fe
-        yarn install --frozen-lockfile
-        yarn test:coverage
-
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1
-      with:
-        files: ./fe/coverage/coverage-final.json
-        fail_ci_if_error: true
-        verbose: true
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: |
+          cd fe
+          yarn install --frozen-lockfile
+          yarn test:coverage
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          files: ./fe/coverage/coverage-final.json
+          fail_ci_if_error: true
+          verbose: true
 
   test-be:
     name: back-end
@@ -47,22 +47,21 @@ jobs:
         node-version: [14.x]
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node-version }}
-    - run: |
-        cd be
-        yarn install --frozen-lockfile
-        yarn test:coverage
-
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v1
-      with:
-        files: ./be/coverage/coverage-final.json
-        fail_ci_if_error: true
-        verbose: true
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: |
+          cd be
+          yarn install --frozen-lockfile
+          yarn test:coverage
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          files: ./be/coverage/coverage-final.json
+          fail_ci_if_error: true
+          verbose: true
 
   build-fe:
     name: build-fe
@@ -77,7 +76,6 @@ jobs:
         run: |
           chmod u+x "${GITHUB_WORKSPACE}/.github/docker-tag.sh"
           "${GITHUB_WORKSPACE}/.github/docker-tag.sh"
-
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
 
@@ -101,6 +99,7 @@ jobs:
     name: build-be
     needs: test-be
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -109,7 +108,6 @@ jobs:
         run: |
           chmod u+x "${GITHUB_WORKSPACE}/.github/docker-tag.sh"
           "${GITHUB_WORKSPACE}/.github/docker-tag.sh"
-
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
 
@@ -128,7 +126,6 @@ jobs:
           context: be
           push: true
           tags: jscdroiddev/docker-nodejs-mariadb-be:${{ env.DOCKER_TAG }}
-
   deploy:
     needs: [build-fe, build-be]
     runs-on: ubuntu-latest
@@ -137,9 +134,13 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+
       - name: Remote deploy
         run: |
           chmod u+x "${GITHUB_WORKSPACE}/.github/docker-deploy.sh"
           "${GITHUB_WORKSPACE}/.github/docker-deploy.sh" "${{ secrets.SERVER_DB_PASSWORD }}" "${{ secrets.DEPLOY_KEY }}" "${{ secrets.DEPLOY_KNOWN_HOST }}" "${{ secrets.DEPLOY_USERNAME }}" "${{ secrets.DEPLOY_SERVER }}"
 
-
+      - name: Deploy database
+        run: |
+          chmod u+x "${GITHUB_WORKSPACE}/.github/db-update.sh"
+          "${GITHUB_WORKSPACE}/.github/db-update.sh" "${{ secrets.DEPLOY_USERNAME }}" "${{ secrets.DEPLOY_SERVER }}" "my_user" "${{ secrets.SERVER_DB_PASSWORD }}" "my_app"
