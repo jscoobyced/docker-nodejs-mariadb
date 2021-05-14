@@ -127,7 +127,7 @@ jobs:
           push: true
           tags: jscdroiddev/docker-nodejs-mariadb-be:${{ env.DOCKER_TAG }}
   deploy:
-#    needs: [build-fe, build-be]
+    needs: [build-fe, build-be]
     runs-on: ubuntu-latest
     #if: github.event_name == 'release' && github.event.action == 'created'
 
