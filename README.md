@@ -3,6 +3,10 @@
 This is all you need to build a full website using ReactJS and NodeJS.
 
 [![codecov](https://codecov.io/gh/jscoobyced/docker-nodejs-mariadb/branch/main/graph/badge.svg)](https://codecov.io/gh/jscoobyced/docker-nodejs-mariadb)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=jscoobyced_docker-nodejs-mariadb&metric=alert_status)](https://sonarcloud.io/dashboard?id=jscoobyced_docker-nodejs-mariadb)
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=jscoobyced_docker-nodejs-mariadb&metric=bugs)](https://sonarcloud.io/dashboard?id=jscoobyced_docker-nodejs-mariadb)
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=jscoobyced_docker-nodejs-mariadb&metric=code_smells)](https://sonarcloud.io/dashboard?id=jscoobyced_docker-nodejs-mariadb)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=jscoobyced_docker-nodejs-mariadb&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=jscoobyced_docker-nodejs-mariadb)
 
 
 ## Quick Start

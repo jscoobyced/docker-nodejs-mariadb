@@ -1,15 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import { App } from './pages/Home';
+import { MockIngredientService } from './services/Ingredient/mock';
 import { ServiceContext } from './services/Context';
-import { MockUserService } from './services/User/mock';
+import './index.css';
 
-const userService = MockUserService();
+const ingredientService = MockIngredientService();
 
 ReactDOM.render(
   <React.StrictMode>
-    <ServiceContext.Provider value={{ userService }}>
+    <ServiceContext.Provider value={{ ingredientService }}>
       <App />
     </ServiceContext.Provider>
   </React.StrictMode>,
