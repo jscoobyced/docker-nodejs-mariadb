@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './Poppins-Light.ttf';
 import './index.css';
 import { App } from './pages/Home';
 import { ServiceContext } from './services/Context';
-import { UserService } from './services/User';
+import { IngredientService } from './services/Ingredient';
 
-const userService = UserService();
+const ingredientService = IngredientService();
 
 ReactDOM.render(
   <React.StrictMode>
-    <ServiceContext.Provider value={{ userService }}>
+    <ServiceContext.Provider value={{ ingredientService }}>
       <App />
     </ServiceContext.Provider>
   </React.StrictMode>,
