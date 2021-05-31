@@ -75,7 +75,7 @@ jobs:
       - name: Create docker tag variable
         run: |
           chmod u+x "${GITHUB_WORKSPACE}/.github/docker-tag.sh"
-          "${GITHUB_WORKSPACE}/.github/docker-tag.sh"
+          "${GITHUB_WORKSPACE}/.github/docker-tag.sh" "${GITHUB_WORKSPACE}"
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
 
@@ -107,7 +107,7 @@ jobs:
       - name: Create docker tag variable
         run: |
           chmod u+x "${GITHUB_WORKSPACE}/.github/docker-tag.sh"
-          "${GITHUB_WORKSPACE}/.github/docker-tag.sh"
+          "${GITHUB_WORKSPACE}/.github/docker-tag.sh" "${GITHUB_WORKSPACE}"
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
 
@@ -135,10 +135,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Create docker tag variable
+        run: |
+          chmod u+x "${GITHUB_WORKSPACE}/.github/docker-tag.sh"
+          "${GITHUB_WORKSPACE}/.github/docker-tag.sh" "${GITHUB_WORKSPACE}"
+
       - name: Remote deploy
         run: |
           chmod u+x "${GITHUB_WORKSPACE}/.github/docker-deploy.sh"
-          "${GITHUB_WORKSPACE}/.github/docker-deploy.sh" "${{ secrets.SERVER_DB_PASSWORD }}" "${{ secrets.DEPLOY_KEY }}" "${{ secrets.DEPLOY_KNOWN_HOST }}" "${{ secrets.DEPLOY_USERNAME }}" "${{ secrets.DEPLOY_SERVER }}"
+          "${GITHUB_WORKSPACE}/.github/docker-deploy.sh" "${{ secrets.SERVER_DB_PASSWORD }}" "${{ secrets.DEPLOY_KEY }}" "${{ secrets.DEPLOY_KNOWN_HOST }}" "${{ secrets.DEPLOY_USERNAME }}" "${{ secrets.DEPLOY_SERVER }}" "${{ env.DOCKER_TAG }}"
 
       - name: Deploy database
         run: |

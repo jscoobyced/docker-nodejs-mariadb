@@ -3,7 +3,7 @@ version: "3.7"
 services:
 
   be:
-    image: jscdroiddev/docker-nodejs-mariadb-be:latest
+    image: jscdroiddev/docker-nodejs-mariadb-be:JSCVERSION
     restart: unless-stopped
     ports:
       - "127.0.0.1:3001:3001"
@@ -14,12 +14,12 @@ services:
       DB_PASSWORD: ${SERVER_DB_PASSWORD}
       DB_NAME: my_app
       BACK_END_API_PORT: 3001
-      FRONT_END_API_HOST: my-server.tld
+      FRONT_END_API_HOST: example.tld
       FRONT_END_API_PORT: none
       FRONT_END_API_SCHEME: https
 
   fe:
-    image: jscdroiddev/docker-nodejs-mariadb-fe:latest
+    image: jscdroiddev/docker-nodejs-mariadb-fe:JSCVERSION
     restart: unless-stopped
     ports:
       - "127.0.0.1:3000:80"
