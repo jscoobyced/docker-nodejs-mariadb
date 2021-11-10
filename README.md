@@ -21,7 +21,7 @@ The Front-End uses the [Create React App](https://github.com/facebook/create-rea
 
 In production mode it uses nginx to serve the application. By default it runs on port 3000 and you will need a reverse-proxy or a load-balancer to expose it to port 80. Refere to [proxy](./doc/deploy/reverse-proxy.md) for details.
 
-You can refer to the [README](./be/README.md) for more details about the Front-End application.
+You can refer to the [README](./fe/README.md) for more details about the Front-End application.
 
 ## Back-End
 The Back-End runs on ExpressJS and exposes port 3001. In the same way, you can run a reverse-proxy or a load-balancer in front of it to expose it to the Internet.
